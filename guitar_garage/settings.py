@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'blog',
-]    
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
