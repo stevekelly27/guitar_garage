@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = [
+jls_extract_var = [
     path('admin/', admin.site.urls),
-    path('summernote/', include('django_summernote.urls')),
     path('blog/', include('blog.urls', namespace='blog')),
+    path('summernote/', include('django_summernote.urls')),
+    path('accounts/', include('allauth.urls'))
 ]
+
+
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Guitar Garage</title>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo_header">
+          <a href="#" class="logo">Guitar Garage</a>
+          <button class="navbar_toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+    
+        
+        <ul class="main_nav">
+          <li>
+            <a href="#" class="nav_links">Home</a>
+          </li>
+          <li>
+            <a href="#" class="nav_links">about</a>
+          </li>
+          <li>
+            <a href="#" class="nav_links">Register/ Sign in</a>
+          </li>
+        </ul>
+          
+    </nav>
+
+    <div class="container">
+
+        <div>
+    
+        {% for post in posts %}
+
+            <div>
+
+            <div><h1>{{post.title}}</h1></div>
+            <div><p>{{post.content}}</p></div>
+
+            </div>    
+
+        {% endfor %}
+
+        </div>
+
+    </div>
+
+<script src="static/script.js"></script>
+</body>
+</html>
