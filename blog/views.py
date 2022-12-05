@@ -27,5 +27,8 @@ def PostDetail(request, pk):
     if request.method == 'POST':
         post = Post.objects.get(id=pk)
         post.body = request.POST.get('body')
-        task.save()
+        post.save()
         return redirect('index.html')
+
+def About(request):
+    return render(request, 'about.html')

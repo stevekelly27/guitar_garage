@@ -23,19 +23,16 @@
 
     <nav class="navbar">
         <div class="logo_header">
-          <a href="#" class="logo">Guitar Garage</a>
-          <button class="navbar_toggle">
-            <i class="fas fa-bars"></i>
-          </button>
+          <a href="{% url 'home' %}" class="logo">Guitar Garage</a>
         </div>
     
         
         <ul class="main_nav">
           <li>
-            <a href="#" class="nav_links">Home</a>
+            <a href="{% url 'home' %}" class="nav_links">Home</a>
           </li>
           <li>
-            <a href="#" class="nav_links">about</a>
+            <a href="{% url 'about' %}" class="nav_links">about</a>
           </li>
         
           {% if user.is_authenticated %}
@@ -54,31 +51,33 @@
           
     </nav>
 
+    <section>
     {% for message in messages %}
-    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+      <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
         {{ message | safe }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     {% endfor %}
+    </section>
 
     {% block content %}
 
     {% endblock content %}
-
-<footer>
-  <p>
-    Follow us on:
-  </p>
-  <a href="#"><i class="fa-brands fa-facebook"></i></a>
-  <a href="#"><i class="fa-brands fa-twitter"></i></a>
-  <a href="#"><i class="fa-brands fa-instagram"></i></a>
-</footer>
-<script>
-  setTimeout(function () {
-      let messages = document.getElementById('msg');
-      let alert = new bootstrap.Alert(messages);
-      alert.close();
-  }, 2500);
-</script>
+  
+    <footer class="footer">
+      <p>
+        Follow us on:
+      </p>
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#"><i class="fa-brands fa-twitter"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    </footer>
+    <script>
+      setTimeout(function () {
+          let messages = document.getElementById('msg');
+          let alert = new bootstrap.Alert(messages);
+          alert.close();
+      }, 2500);
+    </script>
 </body>
 </html>

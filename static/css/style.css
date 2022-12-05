@@ -39,16 +39,16 @@ a{
 }
 
 .main_nav li:hover{
-   background-color: gray
+   background-color: rgb(92, 22, 22)
 }
   
 .main_nav li{
   display: inline;
-  color: #315c6a;
+  color: #ffffff;
 }
 
 .main_nav li a{
-  color: #4e2d2d;
+  color: #ffffff;
 }
 
 body {
@@ -69,5 +69,14 @@ body {
 .card {
   background-color: rgb(181, 166, 166);
   padding: 20px;
+  margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #7c180a;
   margin-top: 20px;
 }
