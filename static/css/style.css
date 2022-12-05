@@ -67,7 +67,8 @@ body {
 
 /* card effect for posts */
 .card {
-  background-color: rgb(181, 166, 166);
+  text-align: center;
+  background-color: rgb(124, 130, 128);
   padding: 20px;
   margin-top: 20px;
 }

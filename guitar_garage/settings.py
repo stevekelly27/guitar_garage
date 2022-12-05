@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'cloudinary_storage',
     'cloudinary',
     'allauth',
