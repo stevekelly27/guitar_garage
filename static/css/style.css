@@ -52,6 +52,7 @@ a{
 }
 
 body {
+  /* background-image: url("/media/img/garage-door-5.jpeg");  */
   max-width: 1800px; 
   margin-left: auto; 
   margin-right: auto;
@@ -68,7 +69,7 @@ body {
 /* card effect for posts */
 .card {
   text-align: center;
-  background-color: rgb(124, 130, 128);
+  background-color: rgb(206, 206, 206);
   padding: 20px;
   margin-top: 20px;
 }
