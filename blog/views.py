@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Post
+from .models import Post, Comment
 from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -20,12 +20,14 @@ def PostList(request):
         post.save()
         return redirect('index.html')
 
-@login_required
+
 def PostDetail(request, pk):
     if request.method == 'GET':
         post = Post.objects.get(id=pk)
+        # comments = Comment.objects.filter(approved=True)
+        comments = post.comments.all()
         comment_form = CommentForm()
-        context = {'post': post, "comment_form": comment_form,}
+        context = {'post': post, "comments": comments, "comment_form": comment_form}
         return render(request, 'post_details.html', context)
 
     # if request.method == 'POST':
@@ -46,19 +48,23 @@ def PostDetail(request, pk):
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.save()
+            return redirect(
+                reverse("post_details", args=[post.id])
+            )
+
         else:
             comment_form = CommentForm()
 
-        return render(
-                request,
-                "post_detail.html",
-                {
-                    "post": post,
-                    "comments": comments,
-                    "commented": True,
-                    "comment_form": comment_form,
-                },
-            )
+            return render(
+                    request,
+                    "post_details.html",
+                    {
+                        "post": post,
+                        "comments": comments,
+                        "commented": True,
+                        "comment_form": comment_form,
+                    },
+                )
 
 
 def About(request):

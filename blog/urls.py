@@ -9,5 +9,11 @@ urlpatterns = [
     path("index", views.PostList, name="home"),
     re_path(r'^about/$', views.About, name="about"),
     path("edit_post/<pk>", views.edit_post, name="edit_post"),
-    path("delete_confirmation/<pk>", views.delete_confirmation, name="delete_confirmation"),
+    path(
+        "delete_confirmation/<pk>",
+        views.delete_confirmation,
+        name="delete_confirmation"
+        ),
+    path("add_post/<pk>", views.add_post, name="add_post"),
+    # path("comment/<pk>", views.PostDetail, name="submit"),
 ]

@@ -2,22 +2,32 @@
 
 {% block content %}
 
+    
+
         {% for post in posts %}
 
-        <div class="card">
-            <div class="card-body">
-                <a href="{% url 'post_details' post.id  %}" class="post-link">  
-                <h5 class="card-title">{{ post.title }}</h5>
-                </a>
-                <p class="card-text">{{ post.excerpt }}</p>
-                <div>
-                    <img class="card-img-bottom" src="..." alt="Card image cap">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'post_details' post.id  %}" class="post-link">  
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    </a>
+                    <p class="card-text">{{ post.excerpt }}</p>
+                    <div>
+                        <img class="card-img-bottom" src="..." alt="Card image cap">
+                    </div>
+                    <p class="card-text"><small class="text-muted">{{post.author}}</small></p>
+                    <p class="card-text"><small class="text-muted">{{post.created_on}}</small></p>
+                    <p class="card-text"><small class="text-muted">{{ updated_on }}</small></p>
+                </div>    
+            </div>
+
+            {% if request.user.is_staff %}
+
+                <div class="text-center">
+                    <a class="btn btn-primary" href="{% url 'add_post' post.id %}">Add Post</a>
                 </div>
-                <p class="card-text"><small class="text-muted">{{post.author}}</small></p>
-                <p class="card-text"><small class="text-muted">{{post.created_on}}</small></p>
-                <p class="card-text"><small class="text-muted">{{ updated_on }}</small></p>
-            </div>    
-        </div>
+
+            {% endif %}
 
         {% endfor %}
 
