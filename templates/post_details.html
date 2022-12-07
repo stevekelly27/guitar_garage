@@ -7,8 +7,12 @@
     <div class="card-body">
         <h5 class="card-title">{{ post.title }}</h5>
         <p class="card-text">{{ post.content }}</p>
-        <div>
-            <img class="card-img-bottom" src="..." alt="Card image cap">
+        <div class="text-center d-none d-md-block col-md-6 masthead-image">
+            {% if "placeholder" in post.featured_image.url %}
+            <img src="https://res.cloudinary.com/ddbz6u5ht/image/upload/v1670386537/ja2ygtkmw5o3jblzhabq.jpg" class="card-img-bottom rounded mx-auto d-block" width="100%">
+            {% else %}
+            <img src=" {{ post.featured_image.url }}" class="card-img-bottom rounded mx-auto d-block" width="100%">
+            {% endif %}
         </div>
         <p class="card-text"><small class="text-muted">{{post.author}}</small></p>
         <p class="card-text"><small class="text-muted">{{post.created_on}}</small></p>
@@ -21,27 +25,44 @@
     <a class="btn btn-primary" href="{% url 'edit_post' post.id %}">Edit</a>
 </div>
 <div class="text-center mt-3"> 
-    <a class="btn btn-danger" href="{% url 'delete_confirmation' post.id %}">Delete</a>
+    <a class="btn btn-danger" href="">Delete</a>
 </div>       
 {% endif %}
 
-<div class="text-center mt-5">Please leave your comments/suggestions below!</div>
-<div class="card-body">
-{% for comment in comments %}
-    <div class="comments" style="padding: 10px;">
-        <p class="font-weight-bold">
-        {{ comment.name }}
-        <span class=" text-muted font-weight-normal">
-         <!-- The comment's created date goes here -->
-        {{ comment.created_on }}
-        </span> wrote:
-        </p>
-        <!-- The body of the comment goes before the | -->
-        {{ comment.body | linebreaks }}
+
+<h4 class="text-center pt-5">Please leave a comment below.</h4>
+
+            {% for comment in comments %}
+<section id="comments">
+    <div class="container my-5 py-5 text-dark">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-11 col-lg-9 col-xl-7">
+        <div class="d-flex flex-start mb-4">
+            <div class="card w-100">
+            <div class="card-body p-4">
+                <div class="">
+                <h5 class="small">{{ comment.name }}</h5>
+                <p class="small">{{ comment.created_on }}</p>
+                <p>
+                    {{ comment.body }}
+                </p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
     </div>
-        <!-- Our for loop ends here -->
-        {% endfor %}
-</div>
+    </div>
+</section>
+{% endfor %}
+
+
+
+
 
 {% if user.is_authenticated %}
 <form method="post" style="margin-top: 1.3em;">

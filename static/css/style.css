@@ -74,6 +74,12 @@ body {
   margin-top: 20px;
 }
 
+/* comments section */
+
+#comments {
+  background-color: #7c170ac3;
+  }
+
 /* Footer */
 .footer {
   padding: 20px;
