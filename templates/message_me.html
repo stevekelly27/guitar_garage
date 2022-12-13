@@ -20,7 +20,6 @@
         {% endfor %}
 </div>
 
-{% if user.is_authenticated %}
 <form method="post" style="margin-top: 1.3em;">
     <div class="form-group text-center">
         {{ comment_form | crispy }}

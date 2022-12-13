@@ -3,9 +3,11 @@ from django.views import generic, View
 from django.views.generic import DetailView, CreateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
+from django.template.defaultfilters import slugify
+from cloudinary_storage import storage
 
 
 def PostList(request):
@@ -72,26 +74,18 @@ def Home(request):
     return render(request, 'index.html')
 
 
-def edit_post(request, pk):
-    if request.method == "GET":
-        if not request.user.is_staff:
-            return redirect(
-                reverse('home')
-            )
-
-    if request.method == "POST":
-        if not request.user.is_staff:
-            return redirect(
-                reverse('home')
-            )
-
-
 def add_post(request):
+
     if request.method == "GET":
         if not request.user.is_staff:
             return redirect(
                 reverse('home')
             )
+        post_form = PostForm()
+        context = {
+            "post_form": post_form
+            }
+        return render(request, 'add_post.html', context)
 
     if request.method == "POST":
         if not request.user.is_staff:
@@ -99,59 +93,78 @@ def add_post(request):
                 reverse('home')
             )
 
+        post_form = PostForm(request.POST, request.FILES, instance=post)
+        if post_form.is_valid():
+            post = post_form.save(commit=False)
+            slug2 = slugify(post.title)
+            post.slug = slug2
+            post.save()
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            post_form = PostForm(instance=post)
 
-# def delete_post(request, id=None):
-
-#     delete_post = get_object_or_404(Post, id=id)
-
-#     creator = delete_post.user.username
-
-#     if request.method == "POST" and request.user.is_authenticated and request.user.username == creator:
-#         delete_post.delete()
-#         messages.success(request, "Post successfully deleted!")
-#         return HttpResponseRedirect("/Blog/list/")
-
-#     context = {'delete_post': delete_post, 'creator': creator}
-
-#     return render(request, 'templates/delete_post.html', context)
-
-
-# def delete_post(request, post_id=None):
-#     post_to_delete = Post.objects.get(id=post_id)
-#     post_to_delete.delete()
-#     return redirect(
-#                 reverse('home')
-#             )
-
-# def delete_post(DeleteView):
-#     if request.method == "POST":
-#         return render(request, 'delete_post.html', context)
+        return render(
+            request,
+            "post_edit.html",
+            {
+                "post_form": post_form
+            })
 
 
-# def delete_post(DeleteView):
+def delete_post(request, slug):
+    if request.method == "GET":
+        context = {
+            "slug": slug
+            }
+        return render(request, 'post_delete.html', context)
 
-#     if request.method == 'POST':
-#         post = Post.objects.create(
-#             body=request.POST.get('body')
-#         )
-#         post.save()
-#         return redirect('delete_post.html')
+    if request.method == "POST":
+        if not request.user.is_superuser:
+            HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        
+        queryset = Post.objects.all()
+        post = get_object_or_404(queryset, slug=slug)
+        storage.cloudinary.api.delete_resources([post.featured_image])
+        post.delete()
+        
+        return HttpResponseRedirect(reverse('home'))
 
-# def message_me(request, pk):
-#     if request.method == 'POST':
-#         post = get_object_or_404(queryset, id=pk)
-#         comments = post.comments.filter(approved=True).order_by("-created_on")
 
-#         comment_form = CommentForm(data=request.POST)
-#         if comment_form.is_valid():
-#             comment_form.instance.email = request.user.email
-#             comment_form.instance.name = request.user.username
-#             comment = comment_form.save(commit=False)
-#             comment.post = post
-#             comment.save()
-#             return redirect(reverse("home", args=[post.id]))
+def edit_post(request, slug):
 
-#         else:
-#             comment_form = CommentForm()
+    if request.method == 'GET':
+        if not request.user.is_staff:
+            HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
-#             return render(request, pk)
+        queryset = Post.objects.all()
+        post = get_object_or_404(queryset, slug=slug)
+        post_form = PostForm(instance=post)
+        return render(
+            request,
+            "post_edit.html", 
+            {
+                "post_form": post_form
+            })
+
+    if request.method == 'POST':
+        if not request.user.is_staff:
+            HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        
+        queryset = Post.objects.all()
+        post = get_object_or_404(queryset, slug=slug)
+        post_form = PostForm(request.POST, request.FILES, instance=post)
+        if post_form.is_valid():
+            post = post_form.save(commit=False)
+            slug2 = slugify(post.title)
+            post.slug = slug2
+            post.save()
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            post_form = PostForm(instance=post)
+
+        return render(
+            request,
+            "post_edit.html",
+            {
+                "post_form": post_form
+            })

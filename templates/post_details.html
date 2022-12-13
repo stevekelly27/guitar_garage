@@ -22,10 +22,10 @@
 
 {% if request.user.is_staff %}
 <div class="text-center mt-3">
-    <a class="btn btn-primary" href="{% url 'edit_post' post.id %}">Edit</a>
+    <a class="btn btn-primary" href="{% url 'edit_post' post.slug %}">Edit</a>
 </div>
 <div class="text-center mt-3"> 
-    <a class="btn btn-danger" href="">Delete</a>
+    <a class="btn btn-danger px-2 px-sm-4 px-md-4 px-lg-5" href="{% url 'delete_post' post.slug %}">Delete?</a>
 </div>       
 {% endif %}
 
