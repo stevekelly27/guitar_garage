@@ -7,7 +7,7 @@
 <h3>Delete: {{ post.title }}</h3>
 
 <div class="form-group">
-    <form>
+    <form method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-secondary px-2 px-sm-4 px-md-4 px-lg-5">Delete Post!</a>
     </form>

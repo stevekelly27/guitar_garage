@@ -1,8 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
-from django.views.generic import DetailView, CreateView, DeleteView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+    View,
+)
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Post, Comment
+from .models import Post, Comment, Catagory
 from .forms import CommentForm, PostForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
@@ -111,37 +118,42 @@ def add_post(request):
             })
 
 
-def delete_post(request, slug):
-    if request.method == "GET":
-        context = {
-            "slug": slug
-            }
-        return render(request, 'post_delete.html', context)
+# def delete_post(request, slug):
+#     if request.method == "GET":
+#         context = {
+#             "slug": slug
+#             }
+#         return render(request, 'post_delete.html', context)
 
-    if request.method == "POST":
-        if not request.user.is_superuser:
-            HttpResponseRedirect(reverse('post_detail', args=[slug]))
-        
-        queryset = Post.objects.all()
-        post = get_object_or_404(queryset, slug=slug)
-        storage.cloudinary.api.delete_resources([post.featured_image])
-        post.delete()
-        
-        return HttpResponseRedirect(reverse('home'))
+#         if request.method == "POST":
+#             if not request.user.is_staff:
+#                 HttpResponseRedirect(reverse('home', args=[slug]))
+
+#             queryset = Post.objects.all()
+#             post = get_object_or_404(queryset, slug=slug)
+#             storage.cloudinary.api.delete_resources([post.featured_image])
+#             post.delete()
+#             return HttpResponseRedirect(reverse('home'))
+
+
+def delete_post(request, slug):
+    data = get_object_or_404(Post, slug)
+    data.delete()
+    return redirect('home')
 
 
 def edit_post(request, slug):
 
     if request.method == 'GET':
         if not request.user.is_staff:
-            HttpResponseRedirect(reverse('post_detail', args=[slug]))
+            HttpResponseRedirect(reverse('home', args=[slug]))
 
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
         post_form = PostForm(instance=post)
         return render(
             request,
-            "post_edit.html", 
+            "post_edit.html",
             {
                 "post_form": post_form
             })
@@ -149,7 +161,7 @@ def edit_post(request, slug):
     if request.method == 'POST':
         if not request.user.is_staff:
             HttpResponseRedirect(reverse('post_detail', args=[slug]))
-        
+
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
         post_form = PostForm(request.POST, request.FILES, instance=post)

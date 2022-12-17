@@ -4,7 +4,7 @@
 
     {% if request.user.is_staff %}
 
-        <div class="text-center">
+        <div class="text-center mt-3">
             <a class="btn btn-primary" href="{% url 'add_post' %}">Add Post</a>
         </div>
 
@@ -19,7 +19,7 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     </a>
                     <p class="card-text">{{ post.excerpt }}</p>
-                    <div class="text-center d-none d-md-block col-md-6 masthead-image">
+                    <div class="offset-md-3 text-center d-none d-md-block col-md-6 masthead-image">
                         {% if "placeholder" in post.featured_image.url %}
                         <img src="https://res.cloudinary.com/ddbz6u5ht/image/upload/v1670386537/ja2ygtkmw5o3jblzhabq.jpg" class="rounded mx-auto d-block" width="100%">
                         {% else %}
