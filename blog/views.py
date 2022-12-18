@@ -9,7 +9,7 @@ from django.views.generic import (
     View,
 )
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Post, Comment, Catagory
+from .models import Post, Comment, Category
 from .forms import CommentForm, PostForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
@@ -20,7 +20,11 @@ from cloudinary_storage import storage
 def PostList(request):
     if request.method == 'GET':
         posts = Post.objects.all().order_by('-created_on')
-        context = {'posts': posts}
+        if 'q' in request.GET: 
+            q = request.GET.get('q', '')
+            posts = Post.objects.filter(category__name=q).order_by('-created_on')
+        categories = Category.objects.all()
+        context = {'posts': posts, 'categories': categories}
         return render(request, 'index.html', context)
 
     if request.method == 'POST':
@@ -99,12 +103,14 @@ def add_post(request):
             return redirect(
                 reverse('home')
             )
-
-        post_form = PostForm(request.POST, request.FILES, instance=post)
+        
+        post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
+            print(post_form.__dict__)
             post = post_form.save(commit=False)
             slug2 = slugify(post.title)
             post.slug = slug2
+            post.author = request.user
             post.save()
             return HttpResponseRedirect(reverse('home'))
         else:
@@ -118,28 +124,67 @@ def add_post(request):
             })
 
 
-# def delete_post(request, slug):
-#     if request.method == "GET":
+def choose_category(request):
+    if request.method == "GET":
+        if not request.user.is_staff:
+            return redirect(
+                reverse('home')
+            )
+#         post_form = PostForm()
 #         context = {
-#             "slug": slug
+#             "post_form": post_form
 #             }
-#         return render(request, 'post_delete.html', context)
+#         return render(request, 'add_category.html', context)
 
-#         if request.method == "POST":
-#             if not request.user.is_staff:
-#                 HttpResponseRedirect(reverse('home', args=[slug]))
+#     if request.method == "POST":
+#         if not request.user.is_staff:
+#             return redirect(
+#                 reverse('home')
+#             )
 
-#             queryset = Post.objects.all()
-#             post = get_object_or_404(queryset, slug=slug)
-#             storage.cloudinary.api.delete_resources([post.featured_image])
-#             post.delete()
+#         post_form = PostForm(request.POST, request.FILES, instance=post)
+#         if post_form.is_valid():
+#             post = post_form.save(commit=False)
+#             slug2 = slugify(post.title)
+#             post.slug = slug2
+#             post.save()
 #             return HttpResponseRedirect(reverse('home'))
+#         else:
+#             post_form = PostForm(instance=post)
+
+#         return render(
+#             request,
+#             "index.html",
+#             {
+#                 "post_form": post_form
+#             })
+
+
 
 
 def delete_post(request, slug):
-    data = get_object_or_404(Post, slug)
-    data.delete()
-    return redirect('home')
+    if request.method == "GET":
+        context = {
+            "slug": slug
+            }
+        return render(request, 'post_delete.html', context)
+
+    if request.method == "POST":
+        if not request.user.is_staff:
+            HttpResponseRedirect(reverse('home', args=[slug]))
+
+        queryset = Post.objects.all()
+        post = get_object_or_404(queryset, slug=slug)
+        storage.cloudinary.api.delete_resources([post.featured_image])
+        post.delete()
+        return HttpResponseRedirect(reverse('home'))
+
+
+
+# def delete_post(request, slug):
+#     data = get_object_or_404(Post, slug)
+#     data.delete()
+#     return redirect('home')
 
 
 def edit_post(request, slug):

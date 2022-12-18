@@ -1,9 +1,9 @@
-from .models import Comment, Post, Catagory
+from .models import Comment, Post, Category
 from django import forms
 from django_summernote.widgets import SummernoteWidget
 
 
-choices = Catagory.objects.all().values_list('name', 'name')
+choices = Category.objects.all().values_list('name', 'name')
 
 choice_list = []
 
@@ -18,11 +18,12 @@ class CommentForm(forms.ModelForm):
 
 
 class PostForm(forms.ModelForm):
+
     class Meta:
         model = Post
-        fields = ('title', 'catagory', 'featured_image', 'excerpt', 'content')
+        fields = ('title', 'category', 'featured_image', 'excerpt', 'content')
         widgets = {
-            'catagory': forms.Select(
+            'category': forms.Select(
                 choices=choice_list, attrs={'class': 'form-control'}),
             'content': SummernoteWidget(),
         }

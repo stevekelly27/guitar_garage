@@ -21,6 +21,14 @@ if os.path.isfile('env.py'):
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
+# SUMMERNOTE_CONFIG = {
+#     # You can put custom Summernote settings
+#     'summernote': {
+#         # Change editor size
+#         'width': '100%',
+#         'height': '200px',
+#     },
+# }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -51,7 +59,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'django_summernote',
-    'blog',
+    'blog.apps.BlogConfig',
 ]
 
 SITE_ID = 1

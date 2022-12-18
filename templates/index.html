@@ -7,9 +7,24 @@
         <div class="text-center mt-3">
             <a class="btn btn-primary" href="{% url 'add_post' %}">Add Post</a>
         </div>
+        
+        <!-- <div class="text-center mt-3">
+            <a class="btn btn-success" href="{% url 'choose_category' %}">Categories</a>
+        </div> -->
 
     {% endif %}
     
+    <div class="dropdown text-center mt-3">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          Categories
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {% for category in categories %}
+          <li><a class="dropdown-item" href="{% url 'home' %}?q={{category.name}}">
+            {{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+      </div>
 
         {% for post in posts %}
 
