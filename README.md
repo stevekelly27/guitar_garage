@@ -1,108 +1,111 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# The Guitar Garage
 
-Welcome stevekelly27,
+The Guitar Garage is a Django blog application built for people who are interested in guitars, pedals, amps and gear in general.
+The purpose of this site is to allow users to add a post of gear you are in the market for or gear you have just bought to get feedback from the guitar community at large. Users can also comment on a post if they are logged in to give their input on the post at hand. 
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+![012147B1-B82D-4253-AA14-9E958E2B85E9](https://user-images.githubusercontent.com/93382818/208962646-cdb9c6a7-ce3e-4df0-8772-5f11b43f79ee.jpeg)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+# User Expierence (UX)
 
-## Gitpod Reminders
+## Project Goals:
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+The primary goal for this project is to create a guitar discussion blog that enables full CRUD functionality.
+The user should be able to login, add a post, edit a post, delete a post and be able to click into individual posts and get the full post content and the ability to add a comment.
 
-`python3 -m http.server`
 
-A blue button should appear to click: _Make Public_,
+# Features
 
-Another blue button should appear to click: _Open Browser_.
+## Existing Features
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### Navigation Bar:
 
-A blue button should appear to click: _Make Public_,
+The navbar is present on all pages of the site. it is built using bootstraps existing built in classes.
+On the left side of the navbar there is the Guitar Garage logo and when clicked redirects the user back to the home page.
+On the right side of the navbar there are three links when logged in and four links when logged out. Home, About, Register and Login are the links present when the user is logged out. 
 
-Another blue button should appear to click: _Open Browser_.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+![6497CA57-7240-4F68-A88B-8B167F5BDC1C_4_5005_c](https://user-images.githubusercontent.com/93382818/208984418-89002982-7345-45f1-8b48-dc504bd6b6fa.jpeg)
 
-To log into the Heroku toolbelt CLI:
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+Home, About and Logout are the links present when the user is logged in.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
 
-------
+![CB5E4628-8866-4989-87FE-A9B61A128F21_4_5005_c](https://user-images.githubusercontent.com/93382818/208984462-00caa25d-07c4-445b-8f56-d01d43d8bcc5.jpeg)
 
-## Release History
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+### Footer:
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+The footer consists of the links to the social media accounts related to the Guitar Garage.
+The icons were sourced from Font Awsome.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+![6167D7E7-27AA-4644-8E85-2C5F8E9A8FFE_4_5005_c](https://user-images.githubusercontent.com/93382818/209021672-b25097e7-1f26-4d88-9b68-581e5ef86760.jpeg)
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+### Home Page:
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+On the Home Page if the user is logged in there will be a button at the top of the page under the navbar to Add A Post. Underneath the Add A Post there is a categories button with a drop down list to help the user navigate between Guitars, Pedals and Amps.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+![FD5230BA-6355-41EF-AB21-DD270168F0F3_4_5005_c](https://user-images.githubusercontent.com/93382818/208986488-ec223d32-47ba-4b85-94e0-574c025a5df1.jpeg)
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+![485DDF95-62DE-404B-9887-115CB2B4ED82](https://user-images.githubusercontent.com/93382818/208986897-2d1c462e-10cc-4695-b085-a3141d897dff.jpeg)
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+below these two buttons are the list of posts showing an excerpt, a featued image, the author of the post and the time the post was created.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+![BC5570E4-AC7B-40B1-B20E-FD56C8F8F0BB](https://user-images.githubusercontent.com/93382818/208986548-6ffad5a8-bc75-4a25-85da-b5cb7a2e13d8.jpeg)
 
-------
 
-## FAQ about the uptime script
+### Post Detail:
 
-**Why have you added this script?**
+Once the user has clicked on a post, the user is redirected to the post detail page. This page concists of the full contents of the post that has been selected. If the user is staff/admin you are able to edit or delete your post from here.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
 
-**How will this affect me?**
+![651703F0-56E2-4CAD-B46B-3AE304817862](https://user-images.githubusercontent.com/93382818/209020091-2181ea40-1f75-4cc2-a9f9-4bb67c326493.jpeg)
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+Under the post content and the edit and delete buttons there is the comments section. The comments section has the comment box at the bottom of the page and comments are above the area to enter your comment. The comment card consists of the comment entery, the author of the comment and the date and time of publishing. The comments are filtered so a new comment is on the bottom of the thread similar to reddit style.
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
 
-**So….?**
+![A9DD2E3B-1EEA-47FF-8BC7-5BAA17F87F3E](https://user-images.githubusercontent.com/93382818/209020933-4d164bc3-98b5-4407-8cc2-53702a962a82.jpeg)
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+### About Page:
 
-**Can I opt out?**
+The about page just has a brief description of what the page is about and inviting everyone to register to the site and to follow the social media pages.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+![3AB1094C-17B9-4A35-ADF2-8FC0E0FB4730](https://user-images.githubusercontent.com/93382818/209024584-c7528356-634d-4228-a34f-244367f58b7c.jpeg)
 
-**Anything more?**
+### Register Page:
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+To interact with the site, the user is required to register and login. Registered users are then given access to add, edit and delete a post and are also given access to comment on a post.
+To register to the Guitar Garage you must make a username, give your email, enter a password and re-enter your password incase of typo.
 
----
+![0A4FFB9F-408F-42A9-9AAE-C4072F3C1D1F](https://user-images.githubusercontent.com/93382818/209025999-9fe94770-a7c3-4441-b890-8d8dd0e48e96.jpeg)
 
-Happy coding!
+When all fields are filled in and the user clicks on sign-up a new account is automatically created and the user is redirected to the home page.
+
+### Login Page:
+
+Again you must register and log in to take advantage of the CRUD functionality.
+The user is only required to enter a username and password to login to the site and there is a remember me checkbox to save login details.
+
+
+![E0ADACF9-AF15-4BC0-AB09-086871C93553](https://user-images.githubusercontent.com/93382818/209026587-e518a037-973d-4f47-a533-d0518ef60f86.jpeg)
+
+When the user enters the correct username and password and clicks on login, they are logged into their account and redirected to the home page.
+
+### Logout Page:
+
+If the user clicks the logout button on the right side of the navbar, they are taken to a page to confirm that theuy do want to sign out of their account. 
+
+
+![96E415DD-3B81-4361-9C34-F87977055B60](https://user-images.githubusercontent.com/93382818/209027007-db7bf5f9-a0b3-4281-9ed7-8946c0eac951.jpeg)
+
+Once the user has clicked the Sign Out button they are signed out of their account and redirected to the home page and a message will appear on the screen saying that you have been sucsessfully logged out.
+
+
+
