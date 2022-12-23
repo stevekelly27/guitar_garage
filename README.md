@@ -59,12 +59,36 @@ below these two buttons are the list of posts showing an excerpt, a featued imag
 ![BC5570E4-AC7B-40B1-B20E-FD56C8F8F0BB](https://user-images.githubusercontent.com/93382818/208986548-6ffad5a8-bc75-4a25-85da-b5cb7a2e13d8.jpeg)
 
 
+### Add Post:
+The add post feature will only be available if the user is registered to the site and logged in.
+On the add post page the user is asked for a title, to choose a category, to upload a featured image, an excerpt and the main content of the post using the included SummernoteWidget.
+
+
+![8800CE23-966F-4D64-B6DF-203A3FB75D1F](https://user-images.githubusercontent.com/93382818/209195197-22b46f59-ecd6-46b9-8c10-213059f76b3f.jpeg)
+
+
+
 ### Post Detail:
 
 Once the user has clicked on a post, the user is redirected to the post detail page. This page concists of the full contents of the post that has been selected. If the user is staff/admin you are able to edit or delete your post from here.
 
 
 ![651703F0-56E2-4CAD-B46B-3AE304817862](https://user-images.githubusercontent.com/93382818/209020091-2181ea40-1f75-4cc2-a9f9-4bb67c326493.jpeg)
+
+
+### Edit Post:
+The edit post page is very similar to the add post page but it is prepopulated with the existing post, the user is able to edit any text/category and once clicked submit is redirected to the home page.
+
+
+![A1F7871E-3FD0-4CCB-ABBD-58117ABAE091](https://user-images.githubusercontent.com/93382818/209196034-c16fd8c1-c679-416b-b649-b041c8769876.jpeg)
+
+
+### Delete Post:
+If the user clicks the delete button on the post detail page they are redirected to the delete post page where it is asking you to confirm that you do want to delete the post. This is a saftey measure so a post is not deleted by accident. If the delete post button is clicked the post will be deleted and the user will be redirected to the home page.
+
+
+![14ACC1D2-77F3-44F2-AAC4-1D47DB8F671C](https://user-images.githubusercontent.com/93382818/209196717-d4bd462c-b4c8-42ed-b2f2-3dee132df34b.jpeg)
+
 
 
 Under the post content and the edit and delete buttons there is the comments section. The comments section has the comment box at the bottom of the page and comments are above the area to enter your comment. The comment card consists of the comment entery, the author of the comment and the date and time of publishing. The comments are filtered so a new comment is on the bottom of the thread similar to reddit style.
@@ -107,5 +131,42 @@ If the user clicks the logout button on the right side of the navbar, they are t
 
 Once the user has clicked the Sign Out button they are signed out of their account and redirected to the home page and a message will appear on the screen saying that you have been sucsessfully logged out.
 
+
+### Django Admin Page:
+
+To manage the blog content of the site, a superuser account was created. This allows a superuser to administer the site. The admin page can be easily be accessed by logging in to the /admin URL with the superuser account. From the admin the superuser will have the ability to delete any post, comment or user. This functionalityis necessary to maintain the blog and remove unwanted content.
+
+
+![DDE2E734-73D2-446C-ABE0-231BE33C9074](https://user-images.githubusercontent.com/93382818/209199616-b6424974-cf6a-4060-ba3c-0f1a502eab58.jpeg)
+
+
+## Design
+
+### Wireframes
+
+As part of the palnning phase wireframes were created using Balsmaiq.
+The wireframes were used to get a basic idea on how the site might look when finished.
+
+Wireframes were created for the following features:
+
+Home Page:
+
+![A17A2517-8CF5-4227-AFF7-CAE268F3A61D_1_105_c](https://user-images.githubusercontent.com/93382818/209250275-fa7ad577-a6a3-4b5b-8154-3b55400b058c.jpeg)
+
+Post Detail:
+
+![85855846-997A-48E4-960A-4EF885CEB1FD](https://user-images.githubusercontent.com/93382818/209250503-8a3f1a11-b743-4b0b-bf84-d9bbc5a35c22.jpeg)
+
+![C6C9306C-A0CB-44C3-89C1-27DC01CB3559_1_105_c](https://user-images.githubusercontent.com/93382818/209250526-3ccfa834-c15e-4e2f-b4e7-5694707a6a7e.jpeg)
+
+Add Post:
+
+![7752BA2C-9245-45A8-BA7A-767845E3AC2C](https://user-images.githubusercontent.com/93382818/209251429-4bf28473-0b91-4503-83f0-0c8470000caa.jpeg)
+
+
+
+## Testing:
+
+### Browser Testing:
 
 
