@@ -169,4 +169,33 @@ Add Post:
 
 ### Browser Testing:
 
+I have tested that this application worksusing a Macbook Pro, with macOS Monteray version 12.0.1 installed, using the following browsers:
+
+- Safari
+- Google Chrome
+- Firefox browser
+
+I have tested that the application works on the following iOS devices:
+
+- iPhone 13 Pro with iOS 15.5 installed
+- iPad pro with iOS 15.6 installed
+
+### Validator Testing:
+
+#### W3C Markup Validator:
+
+![2238ECE4-B51F-4191-A70D-BF9204316043](https://user-images.githubusercontent.com/93382818/209262216-ec21ea1b-e236-4b0a-b984-3c274765ecba.jpeg)
+
+#### W3C CSS Validator:
+
+![74501764-1669-47BA-B478-73C4A8D71B13_4_5005_c](https://user-images.githubusercontent.com/93382818/209262620-36dc8383-1821-4685-a4c1-e73223ce1a3e.jpeg)
+
+
+#### PEP8 Online:
+
+
+
+
+
+
 
