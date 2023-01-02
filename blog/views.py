@@ -103,7 +103,7 @@ def add_post(request):
             return redirect(
                 reverse('home')
             )
-        
+
         post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
             print(post_form.__dict__)
@@ -130,36 +130,6 @@ def choose_category(request):
             return redirect(
                 reverse('home')
             )
-#         post_form = PostForm()
-#         context = {
-#             "post_form": post_form
-#             }
-#         return render(request, 'add_category.html', context)
-
-#     if request.method == "POST":
-#         if not request.user.is_staff:
-#             return redirect(
-#                 reverse('home')
-#             )
-
-#         post_form = PostForm(request.POST, request.FILES, instance=post)
-#         if post_form.is_valid():
-#             post = post_form.save(commit=False)
-#             slug2 = slugify(post.title)
-#             post.slug = slug2
-#             post.save()
-#             return HttpResponseRedirect(reverse('home'))
-#         else:
-#             post_form = PostForm(instance=post)
-
-#         return render(
-#             request,
-#             "index.html",
-#             {
-#                 "post_form": post_form
-#             })
-
-
 
 
 def delete_post(request, slug):
@@ -178,13 +148,6 @@ def delete_post(request, slug):
         storage.cloudinary.api.delete_resources([post.featured_image])
         post.delete()
         return HttpResponseRedirect(reverse('home'))
-
-
-
-# def delete_post(request, slug):
-#     data = get_object_or_404(Post, slug)
-#     data.delete()
-#     return redirect('home')
 
 
 def edit_post(request, slug):

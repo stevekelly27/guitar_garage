@@ -25,5 +25,5 @@ class PostForm(forms.ModelForm):
         widgets = {
             'category': forms.Select(
                 choices=choice_list, attrs={'class': 'form-control'}),
-            'content': SummernoteWidget(),
+            'content': SummernoteWidget(attrs={'summernote': {'width': '100%'}}),
         }

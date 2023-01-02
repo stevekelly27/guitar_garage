@@ -41,6 +41,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["the-guitar-garage.herokuapp.com", "localhost"]
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 
 # Application definition
 
