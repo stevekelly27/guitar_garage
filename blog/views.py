@@ -105,6 +105,7 @@ def add_post(request):
             )
 
         post_form = PostForm(request.POST, request.FILES)
+        print('ok')
         if post_form.is_valid():
             print(post_form.__dict__)
             post = post_form.save(commit=False)
@@ -114,7 +115,7 @@ def add_post(request):
             post.save()
             return HttpResponseRedirect(reverse('home'))
         else:
-            post_form = PostForm(instance=post)
+            post_form = PostForm()
 
         return render(
             request,
@@ -159,6 +160,7 @@ def edit_post(request, slug):
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
         post_form = PostForm(instance=post)
+        print("post_image", post.featured_image.public_id)
         return render(
             request,
             "post_edit.html",
@@ -172,8 +174,11 @@ def edit_post(request, slug):
 
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
+        print('ok2', post)
         post_form = PostForm(request.POST, request.FILES, instance=post)
+        print(post_form)
         if post_form.is_valid():
+            print('ok2')
             post = post_form.save(commit=False)
             slug2 = slugify(post.title)
             post.slug = slug2
