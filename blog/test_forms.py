@@ -32,7 +32,7 @@ class TestForms(TestCase):
         form = PostForm({'title': 'test', 'category': Category.objects.get(id=1), 'featured_image': SimpleUploadedFile(
             name='walrus-audio.jpeg', content=open('media/walrus-audio.jpeg', 'rb').read(), content_type='image/jpeg'), 'excerpt':'test', 'content':'test'})
         self.assertTrue(form.is_valid())
-        
+
     def test_comment_form(self):
         form = CommentForm({'body': 'text'})
         self.assertTrue(form.is_valid())
