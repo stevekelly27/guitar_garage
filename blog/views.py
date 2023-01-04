@@ -38,7 +38,6 @@ def PostList(request):
 def PostDetail(request, pk):
     if request.method == 'GET':
         post = Post.objects.get(id=pk)
-        # comments = Comment.objects.filter(approved=True)
         comments = post.comments.all()
         comment_form = CommentForm()
         context = {
@@ -105,9 +104,7 @@ def add_post(request):
             )
 
         post_form = PostForm(request.POST, request.FILES)
-        print('ok')
         if post_form.is_valid():
-            print(post_form.__dict__)
             post = post_form.save(commit=False)
             slug2 = slugify(post.title)
             post.slug = slug2
@@ -174,11 +171,8 @@ def edit_post(request, slug):
 
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
-        print('ok2', post)
         post_form = PostForm(request.POST, request.FILES, instance=post)
-        print(post_form)
         if post_form.is_valid():
-            print('ok2')
             post = post_form.save(commit=False)
             slug2 = slugify(post.title)
             post.slug = slug2

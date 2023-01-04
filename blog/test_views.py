@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from .models import Post, Comment, Category
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.template.defaultfilters import slugify
-import unittest
 
 
 class TestViews(TestCase):
@@ -44,13 +43,12 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'add_post.html', 'base.html')
         response = self.client.post('/add_post', {
             'title': 'test2',
-            'category': Category.objects.get(id=1),
+            'category': Category.objects.get(id=2),
             'featured_image': SimpleUploadedFile(
                 name='walrus-audio.jpeg', content=open('media/walrus-audio.jpeg', 'rb').read(), content_type='image/jpeg'), 'excerpt':'test',
             'content': 'test2'
             }, follow=True)
         self.assertEqual(response.status_code, 200)
-        print(Post.objects.all())
 
     def test_get_post_edit(self):
         """Test post_edit retrieval and correct template used"""
@@ -66,11 +64,8 @@ class TestViews(TestCase):
                 name='walrus-audio.jpeg', content=open('media/walrus-audio.jpeg', 'rb').read(), content_type='image/jpeg'), 
             'excerpt': 'test',
             'content': 'test-change'})
-        print(response.context)
-        print(response.content.decode())
-        # self.assertEqual(response.status_code, 200)
-        # p = Post.objects.get(id=1)
-        # self.assertEqual(p.content, 'change')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'test-change') #my form got valid and text exists there
 
     def test_get_post_delete(self):
         """Test post_delete retrieval and correct template used"""
@@ -79,11 +74,9 @@ class TestViews(TestCase):
             reverse('delete_post', args=[self.p1.slug]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_delete.html', 'base.html')
-        print(Post.objects.get(id=1))
         response = self.client.post(reverse('delete_post', args=[self.p1.slug]))
         self.assertEqual(response.status_code, 302)
         p = Post.objects.count()
-        print(p)
         self.assertEqual(p, 0)
 
     def test_post_comment(self):
