@@ -10,7 +10,7 @@
         {% csrf_token %}
         {{ post_form | crispy | safe }}
       
-        <button name="submit">Add post</button>
+        <button class="btn btn-success" name="submit">Add post</button>
     </form>
 </div>
 

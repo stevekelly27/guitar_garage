@@ -100,7 +100,7 @@ The edit post page is very similar to the add post page but it is prepopulated w
 
 
 ### Delete Post:
-If the user clicks the delete button on the post detail page they are redirected to the delete post page where it is asking you to confirm that you do want to delete the post. This is a saftey measure so a post is not deleted by accident. If the delete post button is clicked the post will be deleted and the user will be redirected to the home page.
+If the user clicks the delete button on the post detail page they are redirected to the delete post page where it is asking you to confirm that you do want to delete the post. This is a safety measure so a post is not deleted by accident. If the delete post button is clicked the post will be deleted and the user will be redirected to the home page.
 
 
 ![14ACC1D2-77F3-44F2-AAC4-1D47DB8F671C](https://user-images.githubusercontent.com/93382818/209196717-d4bd462c-b4c8-42ed-b2f2-3dee132df34b.jpeg)
@@ -150,7 +150,7 @@ Once the user has clicked the Sign Out button they are signed out of their accou
 
 ### Django Admin Page:
 
-To manage the blog content of the site, a superuser account was created. This allows a superuser to administer the site. The admin page can be easily be accessed by logging in to the /admin URL with the superuser account. From the admin the superuser will have the ability to delete any post, comment or user. This functionalityis necessary to maintain the blog and remove unwanted content.
+To manage the blog content of the site, a superuser account was created. This allows a superuser to administer the site. The admin page can be easily be accessed by logging in to the /admin URL with the superuser account. From the admin the superuser will have the ability to delete any post, comment or user.You also have the ability to add, edit and delete categories. This functionalityis necessary to maintain the blog and remove unwanted content.
 
 
 ![DDE2E734-73D2-446C-ABE0-231BE33C9074](https://user-images.githubusercontent.com/93382818/209199616-b6424974-cf6a-4060-ba3c-0f1a502eab58.jpeg)
@@ -202,11 +202,6 @@ I have tested that the application works on the following iOS devices:
 
 ![74501764-1669-47BA-B478-73C4A8D71B13_4_5005_c](https://user-images.githubusercontent.com/93382818/209262620-36dc8383-1821-4685-a4c1-e73223ce1a3e.jpeg)
 
-
-#### PEP8 Online:
-
-
-
 #### Coverage test results:
 
 
@@ -219,9 +214,8 @@ The application was deployed to Heroku. The steps to deploy are as follows:
 - Enter a unique and meaningful app name.
 - Next select your region.
 - Click on the Create App button.
-#### Attach the Postgres database:
-- In the Resources tab, under add-ons, type in Postgres and select the Heroku Postgres option.
-- Copy the DATABASE_URL located in Config Vars in the Settings Tab.
+#### Confifure Elephant SQL Postgres database in Heroku:
+- Copy the postgres URL from ElephantSQL and paste it in Cinfig vars in settings in heroku
 #### Prepare the environment and settings.py file:
 - In your GitPod workspace, create an env.py file in the main directory.
 - Add the DATABASE_URL value and your chosen SECRET_KEY value to the env.py file. 
@@ -242,6 +236,7 @@ The application was deployed to Heroku. The steps to deploy are as follows:
 Add the following Config Vars in Heroku:
 - SECRET_KEY value 
 - CLOUDINARY_URL
+- DATABASE_URL
 - PORT = 8000
 - DISABLE_COLLECTSTATIC = 1
 #### Deploy
@@ -256,6 +251,7 @@ Add the following Config Vars in Heroku:
 - GitHub - Used for version control and agile tool
 - Django -  Main python framework used in the development of this project
 - Django-allauth -  authentication library used to create the user accounts
+- ElephantSQL - used to host postgres URL
 - PostgreSQL - was used as the database for this project
 - dj_database_url - Used to allow database urls to connect to the postgres database
 - psycopg2 - Used PostgreSQL database adapter
@@ -265,10 +261,9 @@ Add the following Config Vars in Heroku:
 - Bootstrap 4.6 - CSS Framework for developing responsiveness and styling
 - Crispy Forms - used to manage Django Forms
 - W3C - Used for HTML & CSS Validation
-- PEP8 Online - used to validate all the Python code
+- Conforms to PEP8 python standards
 - Responsinator - Used to verify responsiveness of website on different devices.
 - Balsamiq - Used to generate Wireframe images
-- Grammerly - used to proof read the README.md
 - Font Awesome - Used for icons in the footer
 - Chrome Dev Tools - Used for overall development and tweaking, including testing responsiveness and performance
 
