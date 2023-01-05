@@ -20,7 +20,7 @@ class TestViews(TestCase):
         self.c3 = Category.objects.create(name='guitar', description='gibson')
         self.p1 = Post.objects.create(title='test', slug=slugify('test'), author=self.user, category=self.c1, featured_image=SimpleUploadedFile(
             name='walrus-audio.jpeg', content=open('media/walrus-audio.jpeg', 'rb').read(), content_type='image/jpeg'), excerpt='test', content='test')
-        self.com1 = Comment.objects.create(name='test', post=self.p1, email='test', body='test', approved=True)  
+        self.com1 = Comment.objects.create(name='test', post=self.p1, email='test', body='test', approved=True)
 
     def test_get_recent_post_list(self):
         """Test home retrieval and correct template used"""
@@ -45,7 +45,8 @@ class TestViews(TestCase):
             'title': 'test2',
             'category': Category.objects.get(id=2),
             'featured_image': SimpleUploadedFile(
-                name='walrus-audio.jpeg', content=open('media/walrus-audio.jpeg', 'rb').read(), content_type='image/jpeg'), 'excerpt':'test',
+                name='walrus-audio.jpeg', content=open('media/walrus-audio.jpeg', 'rb').read(), content_type='image/jpeg'),
+            'excerpt': 'test',
             'content': 'test2'
             }, follow=True)
         self.assertEqual(response.status_code, 200)
@@ -61,11 +62,12 @@ class TestViews(TestCase):
             'title': 'test',
             'category': Category.objects.get(id=1),
             'featured_image': SimpleUploadedFile(
-                name='walrus-audio.jpeg', content=open('media/walrus-audio.jpeg', 'rb').read(), content_type='image/jpeg'), 
+                name='walrus-audio.jpeg', content=open(
+                    'media/walrus-audio.jpeg', 'rb').read(), content_type='image/jpeg'),
             'excerpt': 'test',
             'content': 'test-change'})
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'test-change') #my form got valid and text exists there
+        self.assertContains(response, 'test-change')
 
     def test_get_post_delete(self):
         """Test post_delete retrieval and correct template used"""
@@ -74,7 +76,8 @@ class TestViews(TestCase):
             reverse('delete_post', args=[self.p1.slug]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_delete.html', 'base.html')
-        response = self.client.post(reverse('delete_post', args=[self.p1.slug]))
+        response = self.client.post(
+            reverse('delete_post', args=[self.p1.slug]))
         self.assertEqual(response.status_code, 302)
         p = Post.objects.count()
         self.assertEqual(p, 0)

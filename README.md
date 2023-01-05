@@ -1,22 +1,38 @@
 # The Guitar Garage
-
 The Guitar Garage is a Django blog application built for people who are interested in guitars, pedals, amps and gear in general.
 The purpose of this site is to allow users to add a post of gear you are in the market for or gear you have just bought to get feedback from the guitar community at large. Users can also comment on a post if they are logged in to give their input on the post at hand. 
 
 ![012147B1-B82D-4253-AA14-9E958E2B85E9](https://user-images.githubusercontent.com/93382818/208962646-cdb9c6a7-ce3e-4df0-8772-5f11b43f79ee.jpeg)
 
-# User Expierence (UX)
-
-## Project Goals:
-
+## User Expierence (UX)
+### Project Goals:
 The primary goal for this project is to create a guitar discussion blog that enables full CRUD functionality.
 The user should be able to login, add a post, edit a post, delete a post and be able to click into individual posts and get the full post content and the ability to add a comment.
 
+### Strategy:
+An Agile methodology was used to plan this project. This was implemented using a Kanban board in GitHub Project with linked Issues. To cover the goals of this project, a total of 9 User Stories were created each with their own acceptance criterias and tasks to complete.
+### User Stories
 
-# Features
+#### Login/ Logout:
+- As a Site User I can login or logout so that I can comment on posts
+#### Registration:
+- As a Site User I can register an account so that I can comment on posts
+#### Site Navigation:
+- As a Site User I can intuitively navigate the site so that **I can find posts and learn about the page **
+#### Add Post:
+- As a Admin I can add a post* so that I can review something and give feedback
+#### Edit Post:
+- As a Admin I can edit posts so that I can update content
+#### Delete Post:
+- As a Admin I can delete a post so that discard of post if inclined
+#### Comment on Post:
+- As a Site User I can leave a comment on posts so that I can give feedback and interact
+#### View Post:
+- As a Site User I can click on post title to view a post so that I can read the full content of the post, and read the comments
+#### Category:
+- As a Site User I can navigate through the category list so that I can see the content specific to my interests
 
-## Existing Features
-
+## Features
 ### Navigation Bar:
 
 The navbar is present on all pages of the site. it is built using bootstraps existing built in classes.
@@ -163,26 +179,22 @@ Add Post:
 
 ![7752BA2C-9245-45A8-BA7A-767845E3AC2C](https://user-images.githubusercontent.com/93382818/209251429-4bf28473-0b91-4503-83f0-0c8470000caa.jpeg)
 
-
-
 ## Testing:
 
 ### Browser Testing:
-
 I have tested that this application worksusing a Macbook Pro, with macOS Monteray version 12.0.1 installed, using the following browsers:
-
 - Safari
 - Google Chrome
 - Firefox browser
 
 I have tested that the application works on the following iOS devices:
-
 - iPhone 13 Pro with iOS 15.5 installed
 - iPad pro with iOS 15.6 installed
 
 ### Validator Testing:
 
-#### W3C Markup Validator:
+#### W3C HTML Validator:
+
 
 ![2238ECE4-B51F-4191-A70D-BF9204316043](https://user-images.githubusercontent.com/93382818/209262216-ec21ea1b-e236-4b0a-b984-3c274765ecba.jpeg)
 
@@ -195,76 +207,86 @@ I have tested that the application works on the following iOS devices:
 
 
 
+#### Coverage test results:
+
 
 
 ## Deployment
 The application was deployed to Heroku. The steps to deploy are as follows:
-#### Create Heroku App
-- Login to Heroku dashboard to get an overview of installed apps.
-- Click on New then Create new app.
-- Choose a name for your application (must be unique) and enter your location.
-- Click on Create app.
-- After creating your new application, navigate and click on the Resources tab.
-- In the Add-ons search bar enter Heroku Postgres then Select Heroku Postgres.
-- A pop-up window till appear, choose Plan name Hobby Dev - Free.
-- Click on Submit order form.
-- Navigate to the Settings tab then click on Reveal Config Vars.
-- Copy the DATABASE_URL url value to the clipboard.
-- In GitPod, create a new env.py file on top level directory.
-- In the env.py file:
-  - Set environment variables: os.environ[”DATABASE_URL"] = "Paste in Heroku DATABASE_URL Link”
-  - Add in secret key: os.environ[”SECRET_KEY"] = "Make up your own randomSecretKey”
-- In Heroku Navigate to the Settings tab then click on Reveal Config Vars.
-- Add SECRET_KEY to Config Vars with the randomSecretKey value previously chosen.
-- In the settings.py file:
-  - Delete the insecure secret key and replace it with: SECRET_KEY = os.environ.get(’SECRET_KEY')
-  - Update to use the DATABASE_URL: dj_database_url.parse(os.environ.get(”DATABASE_URL"))
-- Save all files and Make Migrations: python3 manage.py migrate
-- Login to Cloudinary and go to the Cloudinary Dashboard.
-- Copy your CLOUDINARY_URL API Environment Variable to the clipboard.
-- In the env.py file:
-  - Add Cloudinary URL: os.environ["CLOUDINARY_URL"] = ”cloudinary://paste in API Environment Variable”
-- In Heroku, go to the Settings tab then click on Reveal Config Vars.
-- Add ’CLOUDINARY_URL’ to Config Vars with the in API Environment Variable value.
-- Add ’DISABLE_COLLECTSTATIC’ 1 to Heroku Config Vars (temporary, must be removed before final deployment).
-- In the settings.py file:
-  - Add Cloudinary Libraries to installed apps (note: order is important) ’cloudinary_storage',  ’django.contrib.staticfiles', ’cloudinary',
-  - Add the following code below STATIC_URL = ’/static/' to use Cloudinary to store media and static files:
-    - STATICFILES_STORAGE = ’cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-    - STATICFILES_DIRS = [os.path.join(BASE_DIR, ’static')]
-    - STATIC_ROOT = os.path.join(BASE_DIR, ’staticfiles')
-    - MEDIA_URL = '/media/'
-    - DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-  - Link file to the templates directory in Heroku: TEMPLATES_DIR = os.path.join(BASE_DIR, ’templates')
-  - Change the templates directory to: TEMPLATES_DIR: 'DIRS': [TEMPLATES_DIR],
-  - Add Heroku Hostname to ALLOWED_HOSTS: ALLOWED_HOSTS = [”Your_Project_name.herokuapp.com”, ”localhost”]
-- Create 3 new folders on top level directory: media, static, templates
-- Create a Procfile on the top level directory
-- In the Procfile file:
-  - Add the following code with your project name: web: gunicorn PROJ_NAME.wsgi
-- In the terminal: Add, Commit and Push.
+#### Create the Heroku App:
+- Log in to [Heroku](https://dashboard.heroku.com/apps) or create an account.
+- On the main page click the button labelled New in the top right corner and from the drop-down menu select "Create New App".
+- Enter a unique and meaningful app name.
+- Next select your region.
+- Click on the Create App button.
+#### Attach the Postgres database:
+- In the Resources tab, under add-ons, type in Postgres and select the Heroku Postgres option.
+- Copy the DATABASE_URL located in Config Vars in the Settings Tab.
+#### Prepare the environment and settings.py file:
+- In your GitPod workspace, create an env.py file in the main directory.
+- Add the DATABASE_URL value and your chosen SECRET_KEY value to the env.py file. 
+- Update the settings.py file to import the env.py file and add the SECRETKEY and DATABASE_URL file paths.
+- Comment out the default database configuration.
+- Save files and make migrations.
+- Add Cloudinary URL to env.py
+- Add the cloudinary libraries to the list of installed apps.
+- Add the STATIC files settings - the url, storage path, directory path, root path, media url and default file storage path.
+- Link the file to the templates directory in Heroku.
+- Change the templates directory to TEMPLATES_DIR
+- Add Heroku to the ALLOWED_HOSTS list the format ['app_name.heroku.com', 'localhost']
+#### Create files / directories
+- Create requirements.txt file
+- Create three directories in the main directory; media, storage and templates.
+- Create a file named "Procfile" in the main directory and add the following: web: gunicorn project-name.wsgi
+#### Update Heroku Config Vars
+Add the following Config Vars in Heroku:
+- SECRET_KEY value 
+- CLOUDINARY_URL
+- PORT = 8000
+- DISABLE_COLLECTSTATIC = 1
 #### Deploy
-- In Heroku go to the Deploy tab then click on Deploy Branch.
-- When the build process is finished click on Open App to visit the live site.
+- NB: Ensure in Django settings, DEBUG is False
+- Go to the deploy tab on Heroku and connect to GitHub, then to the required repository. 
+- Scroll to the bottom of the deploy page and either click Enable Automatic Deploys for automatic deploys or Deploy Branch to deploy manually. Manually deployed branches will need re-deploying each time the repo is updated.
+- Click View to view the deployed site.
+
 
 
 ## Frameworks/ Libraries/ Programs Used:
-
-- Django: Main python framework used in the development of this project
-- Django-allauth: authentication library used to create the user accounts
-- PostgreSQL was used as the database for this project.
-- Heroku - was used as the cloud based platform to deploy the site.
-- Summernote: A editor to allow users to edit their posts
-- Crispy Forms used to manage Django Forms
-- Cloudinary: the image hosting service used to upload images
-- Bootstrap 4.6: CSS Framework for developing responsiveness and styling
-- W3C - Used for HTML & CSS Validation.
+- GitHub - Used for version control and agile tool
+- Django -  Main python framework used in the development of this project
+- Django-allauth -  authentication library used to create the user accounts
+- PostgreSQL - was used as the database for this project
+- dj_database_url - Used to allow database urls to connect to the postgres database
+- psycopg2 - Used PostgreSQL database adapter
+- Heroku - was used as the cloud based platform to deploy the site
+- Summernote -  A editor to allow users to edit their posts
+- Cloudinary - the image hosting service used to upload images
+- Bootstrap 4.6 - CSS Framework for developing responsiveness and styling
+- Crispy Forms - used to manage Django Forms
+- W3C - Used for HTML & CSS Validation
 - PEP8 Online - used to validate all the Python code
-- Jshint - used to validate javascript
 - Responsinator - Used to verify responsiveness of website on different devices.
-- Balsamiq - Used to generate Wireframe images.
-- Chrome Dev Tools - Used for overall development and tweaking, including testing responsiveness and performance.
-- Font Awesome - Used for icons in the footer.
-- GitHub - Used for version control and agile tool.
-- Google Fonts - Used to import and alter fonts on the page.
+- Balsamiq - Used to generate Wireframe images
 - Grammerly - used to proof read the README.md
+- Font Awesome - Used for icons in the footer
+- Chrome Dev Tools - Used for overall development and tweaking, including testing responsiveness and performance
+
+
+## Languages
+- HTML
+- CSS
+- Python
+- Javascript
+
+
+## Credits
+- [W3Schools](https://www.w3schools.com/)
+- [Django Docs](https://docs.djangoproject.com/en/4.0/)
+- [Bootstrap 4.6 Docs](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
+- [Stack Overflow](https://stackoverflow.com/)
+- [Code Institute - Blog Walkthrough Project](https://github.com/Code-Institute-Solutions/Django3blog)
+
+
+## Acknowledgments
+- I would like to acknowledge and thank Freddie Dermesonoglou for code review, help and feedback. σας ευχαριστώ

@@ -22,7 +22,8 @@ def PostList(request):
         posts = Post.objects.all().order_by('-created_on')
         if 'q' in request.GET: 
             q = request.GET.get('q', '')
-            posts = Post.objects.filter(category__name=q).order_by('-created_on')
+            posts = Post.objects.filter(category__name=q).order_by(
+                "-created_on")
         categories = Category.objects.all()
         context = {'posts': posts, 'categories': categories}
         return render(request, 'index.html', context)
